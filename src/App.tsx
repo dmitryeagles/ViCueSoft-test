@@ -1,10 +1,11 @@
 import React from 'react';
-import { LoginPage } from './page/login-page';
+//import { LoginPage } from './page/login-page';
+import { TopMenu } from './page/top-menu';
 
 function App() {
   return (
     <div>
-      <LoginPage />
+      <TopMenu />
     </div>
   );
 }
