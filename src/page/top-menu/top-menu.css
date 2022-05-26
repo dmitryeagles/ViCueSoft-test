@@ -1,0 +1,12 @@
+.tableContainer{
+    display: flex;
+}
+.login-form_page{
+    height: 80vh;
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

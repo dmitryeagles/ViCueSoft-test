@@ -1,0 +1,9 @@
+.login-page {
+    height: 100vh;
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

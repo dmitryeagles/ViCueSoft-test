@@ -1,0 +1,56 @@
+
+
+.itemImg {
+    margin: auto;
+    height: 320px;
+    
+}
+.imgBox{
+    display: grid;
+    
+}
+.imgBox img{
+    width: 200px;
+}
+.price {
+    font-size: 18px;
+
+}
+.price span{
+    font-size: 12px;
+    text-decoration: line-through;
+    color: #929292;
+}
+
+
+
+
+
+
+
+.classesSaleBtnProcent{
+    border-radius: 20;
+    padding: '0 10px';
+    font-size: '12px';
+    color: '#C30083';
+    text-transform: 'none';
+    position: 'absolute';
+    z-index: '100';
+    bottom: '48%';
+    left: '5%';
+    background: 'rgba(242,235,245)';
+    font-weight: 'bold';
+}
+
+
+.classesBtnSale{
+    background: 'linear-gradient(45deg, #ABF000 30%, #FFF700 70%)';
+    border: 0;
+    border-radius: 20;
+    height: 30;
+    padding: '0 10px';
+    width:'150px';
+    font-size: '12px';
+    color: '#000000';
+    font-weight: 'bold';
+}

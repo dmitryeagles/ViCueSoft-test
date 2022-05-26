@@ -3,8 +3,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { LoginPage } from '../login-page/login-page';
-import { HomePage } from '../home-page';
+import { LoginForm } from '../login-page/login-form';
+import { UsersPage } from '../users-page';
+import { NotificationsRelabs } from '../notifications';
+import './top-menu.css'
+import { ProductPage } from '../products-page';
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -47,7 +51,7 @@ export const TopMenu:React.FC = () => {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ marginLeft: '40px', marginRight: '40px'}}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Главная страница" {...a11yProps(0)} />
@@ -56,13 +60,18 @@ export const TopMenu:React.FC = () => {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <HomePage/>
+        <div className='tableContainer'>
+          <UsersPage/>
+          <NotificationsRelabs/>
+        </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <LoginPage />
+        <div className='login-form_page'>
+          <LoginForm />
+        </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Карточки товаров
+        <ProductPage/>
       </TabPanel>
     </Box>
   );
