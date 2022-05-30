@@ -6,17 +6,19 @@ import Box from '@mui/material/Box';
 import { LoginForm } from '../login-page/login-form';
 import { UsersPage } from '../users-page';
 import { NotificationsRelabs } from '../notifications';
-import './top-menu.css'
 import { ProductPage } from '../products-page';
+import './top-menu.css'
+//import UsersPars from '../users-page/users-pars';
 
 
-interface TabPanelProps {
+
+interface ITabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
 }
 
-function TabPanel(props: TabPanelProps) {
+function TabPanel(props: ITabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
@@ -61,6 +63,7 @@ export const TopMenu:React.FC = () => {
       </Box>
       <TabPanel value={value} index={0}>
         <div className='tableContainer'>
+          
           <UsersPage/>
           <NotificationsRelabs/>
         </div>
