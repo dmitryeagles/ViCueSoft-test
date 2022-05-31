@@ -16,17 +16,14 @@ interface ISingInform {
   password: string;
 }
 
-
-
-
 export const LoginForm: React.FC = () => {
-  const { handleSubmit, control } = useForm<ISingInform>({
-    mode: "onChange",
-  });
-  const { errors } = useFormState({
-    control
-  });
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<ISingInform>({mode: 'onChange'});
   const onSubmit: SubmitHandler<ISingInform> = (data) => console.log(data);
+  
 
   return (
     <div className="login-form">
@@ -55,7 +52,8 @@ export const LoginForm: React.FC = () => {
               fullWidth={true}
               onChange={(e) => field.onChange(e)}
               value={field.value}
-              
+              error={errors.login !== undefined}
+              helperText={errors.login && "Не верный формат e-mail"}
             />
           )}
         />
@@ -72,6 +70,8 @@ export const LoginForm: React.FC = () => {
               fullWidth={true}
               onChange={(e) => field.onChange(e)}
               value={field.value}
+              error={errors.password !== undefined}
+              helperText={errors.password && "Пароль минимум 8 символом и 1 загравная буква"}
             />
           )}
         />

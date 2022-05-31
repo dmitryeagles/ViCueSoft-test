@@ -27,7 +27,7 @@ export const NotificationsRelabs: React.FC = () => {
         marginRight: "10px",
         paddingLeft: "10px",
         paddingRight: "10px",
-        
+        height: '68vh'
       }}
     >
       <Table>

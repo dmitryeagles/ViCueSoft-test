@@ -5,14 +5,15 @@ import {
   UsersResponse,
   Notification,
 } from "../types/common.types";
-import { format } from 'date-fns'
+import { format } from "date-fns";
 
-export async function fetchUsers(): Promise<User[]> {
+export async function fetchUsers(page: number): Promise<UsersResponse> {
   const resp = await axios.get<UsersResponse>(
-    "https://test.relabs.ru/api/users/list"
+    "https://test.relabs.ru/api/users/list",
+    { params: { limit: 5, offset: (page - 1) * 5 } }
   );
 
-  return resp.data.items;
+  return resp.data
 }
 
 export async function fetchProducts(): Promise<Product[]> {
@@ -41,10 +42,10 @@ export function collectNotifications(
 ): void {
   socket.addEventListener("message", (event) => {
     const obj = JSON.parse(event.data);
-    const notification: Notification= {
-          event: obj.event,
-          ctime: format(new Date(obj.ctime * 1000),'dd.MM.yyyy HH:MM' ),
-    }
+    const notification: Notification = {
+      event: obj.event,
+      ctime: format(new Date(obj.ctime * 1000), "dd.MM.yyyy HH:MM"),
+    };
     onNotification(notification);
   });
 }

@@ -4,9 +4,10 @@ import { format } from "date-fns";
 import { User } from "../../types/common.types";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export type UserRowProps={ user: User }
+export type UserRowProps = { user: User; removeRow: (id: number) => void };
 
-export const UserRow: React.FC<UserRowProps> = ({ user }) => {
+export const UserRow: React.FC<UserRowProps> = ({ user, removeRow}) => {
+
   return (
     <TableRow key={user.id}>
       <TableCell>{user.id}</TableCell>
@@ -19,6 +20,7 @@ export const UserRow: React.FC<UserRowProps> = ({ user }) => {
           size="small"
           color="error"
           startIcon={<DeleteIcon />}
+          onClick={()=> removeRow(user.id)}
         >
           Удалить
         </Button>

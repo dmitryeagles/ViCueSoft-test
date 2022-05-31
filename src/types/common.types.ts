@@ -1,6 +1,7 @@
 export type UsersResponse = {
   limit: number;
   offset: number;
+  total: number;
   items: User[];
 };
 
@@ -25,3 +26,9 @@ export type Notification = {
   event: string;
 }
 
+
+export type PagUsers = {
+  usersPerPage: number;
+  totalUsers: number;
+  paginate: number;
+}
