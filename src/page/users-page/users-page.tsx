@@ -8,13 +8,12 @@ import {
   TableCell,
   Paper,
 } from "@mui/material";
-import Pagination from "@mui/material/Pagination";
-import "./users-page.css";
 import { User } from "../../types/common.types";
 import { fetchUsers } from "../../api/client.api";
 import { UserRow } from "./user.row";
 import { UserLoadingPage } from "./user-loading-page";
 import CustomPagination from "./custom-pagination";
+import "./users-page.css";
 
 export const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);

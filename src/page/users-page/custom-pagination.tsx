@@ -1,11 +1,9 @@
 import React from "react";
+import {NavLink} from 'react-router-dom'
+import { CustomPaginationProps } from "../../types/common.types";
 import './custom-pagination.css'
 
-type CustomPaginationProps = {
-  total: number;
-  perPage: number;
-  onPage: (page: number) => void;
-};
+
 
 const CustomPagination: React.FC<CustomPaginationProps> = ({
   total,
@@ -23,9 +21,9 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
       <ul>
         {pages.map((page) => (
           <li key={page}>
-            <a  href="!#" onClick={() => onPage(page)}>
+            <NavLink  to="#" onClick={() => onPage(page)}>
               {page}
-            </a>
+            </NavLink>
           </li>
         ))}
       </ul>

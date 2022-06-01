@@ -17,18 +17,22 @@ export type Product = {
   price: number;
   sale: number;
   img: string;
-  description:string;
-
-} ;
+  description: string;
+};
 
 export type Notification = {
   ctime: string;
   event: string;
-}
-
+};
 
 export type PagUsers = {
   usersPerPage: number;
   totalUsers: number;
   paginate: number;
-}
+};
+
+export type CustomPaginationProps = {
+  total: number;
+  perPage: number;
+  onPage: (page: number) => void;
+};

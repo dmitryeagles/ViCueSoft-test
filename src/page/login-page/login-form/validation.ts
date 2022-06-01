@@ -9,6 +9,10 @@ export const loginValidation = {
     if (!value.match(/[@]/)) {
       return "e-mail в формате: index@index.com";
     }
+    if (value.match(/[ ]/)) {
+      return "e-mail не может содержать пробелы";
+    }
+   
 
     return true;
   },
@@ -17,6 +21,7 @@ export const loginValidation = {
 export const passwordValidation = {
   required: REQUIRED_FIELD,
   validate: (value: string) => {
+    
     if (value.match(/[ ]/)) {
       return "Пароль не может содержать пробелы";
     }
@@ -27,6 +32,7 @@ export const passwordValidation = {
     if (!value.match(/.[A-Z]/)) {
       return "Добавьте хотя бы одну заглавнуб букву";
     }
+    
 
     return true;
   },
