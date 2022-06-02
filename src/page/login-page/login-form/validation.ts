@@ -6,7 +6,7 @@ export const loginValidation = {
     if (value.match(/[а-яА-Я]/)) {
       return "Логин не может содержать русские буквы";
     }
-    if (!value.match(/[@]/)) {
+    if (!value.match(/[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)) {
       return "e-mail в формате: index@index.com";
     }
     if (value.match(/[ ]/)) {
