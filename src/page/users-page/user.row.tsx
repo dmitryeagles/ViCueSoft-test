@@ -4,6 +4,8 @@ import { format } from "date-fns";
 import { User } from "../../types/common.types";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+
+
 export type UserRowProps = { user: User; removeRow: (id: number) => void };
 
 export const UserRow: React.FC<UserRowProps> = ({ user, removeRow}) => {
@@ -13,7 +15,7 @@ export const UserRow: React.FC<UserRowProps> = ({ user, removeRow}) => {
       <TableCell>{user.id}</TableCell>
       <TableCell>{user.name}</TableCell>
       <TableCell>{user.role}</TableCell>
-      <TableCell>{format(user.ctime, "dd.MM.yyyy HH:mm")}</TableCell>
+      <TableCell>{format(new Date(user.ctime * 1000), "dd.MM.yyyy HH:mm")}</TableCell>
       <TableCell>
         <Button
           variant="outlined"
