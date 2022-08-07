@@ -3,10 +3,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { LoginForm } from "../login-page/login-form";
-import { UsersPage } from "../users-page";
-import { NotificationsRelabs } from "../notifications";
-import { ProductPage } from "../products-page";
+import { ItemsPage } from "../items-page";
+import { DescriptionPage } from "../description-page";
 import "./top-menu.css";
 import { ITabPanelProps } from "../../interface/common.interface";
 
@@ -53,23 +51,16 @@ export const TopMenu: React.FC = () => {
           aria-label="basic tabs example"
         >
           <Tab label="Главная страница" {...a11yProps(0)} />
-          <Tab label="Авторизация" {...a11yProps(1)} />
-          <Tab label="Карточки товаров" {...a11yProps(2)} />
+          <Tab label="Описание" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
         <div className="tableContainer">
-          <UsersPage />
-          <NotificationsRelabs />
+          <ItemsPage />
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className="login-form_page">
-          <LoginForm />
-        </div>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <ProductPage />
+        <DescriptionPage />
       </TabPanel>
     </Box>
   );

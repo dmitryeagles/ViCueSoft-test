@@ -1,51 +1,30 @@
 import axios from "axios";
-import {
-  Product,
-  User,
-  UsersResponse,
-  Notification,
-} from "../types/common.types";
-import { format } from "date-fns";
+import {Item, ItemsResponse} from "../types/common.types";
 
-export async function fetchUsers(page: number): Promise<UsersResponse> {
-  const resp = await axios.get<UsersResponse>(
-    "https://test.relabs.ru/api/users/list",
-    { params: { limit: 5, offset: (page - 1) * 5 } }
+export async function fetchItems(page: number): Promise<ItemsResponse> {
+  const resp = await axios.get<ItemsResponse>(
+    "https://api.punkapi.com/v2/beers",
+    { params: { page: 1, per_page: (page * 20) } }
   );
-
   return resp.data
 }
 
-export async function fetchProducts(): Promise<Product[]> {
-  const product1: Product = {
+export async function fetchItemsOff(): Promise<Item[]> {
+  const item1: Item = {
     id: 0,
     description:
-      "Apple/Смартфон iPhone 13 pro 128Gb / 6.1 / 2532x1170 / OLED /128 Гб",
-    price: 100000,
-    img: "https://atstore.ba/wp-content/uploads/2020/10/1-20.png",
-    sale: 14,
+      "Здесь какое-то описание первого пиваса с сервера",
+    name: "Описание какого-то пиваса",
+    image_url: "",
+    first_brewed: "Что-то про первую дату налива",
   };
-  const product2: Product = {
-    id: 0,
+  const item2: Item = {
+    id: 1,
     description:
-      "Apple/Смартфон iPhone 10 pro 128Gb / 6.1 / 2532x1170 / OLED /128 Гб",
-    price: 80000,
-    img: "https://atstore.ba/wp-content/uploads/2020/10/1-20.png",
-    sale: 14,
+      "Здесь какое-то описание второго пиваса с сервера",
+    name: "Описание какого-то другого пиваса",
+    image_url: "",
+    first_brewed: "Что-то про первую дату налива",
   };
-  return [product1, product2];
-}
-
-export function collectNotifications(
-  socket: WebSocket,
-  onNotification: (n: Notification) => void
-): void {
-  socket.addEventListener("message", (event) => {
-    const obj = JSON.parse(event.data);
-    const notification: Notification = {
-      event: obj.event,
-      ctime: format(new Date(obj.ctime * 1000), "dd.MM.yyyy HH:MM"),
-    };
-    onNotification(notification);
-  });
+  return [item1, item2];
 }

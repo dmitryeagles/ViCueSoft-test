@@ -1,34 +1,32 @@
-export type UsersResponse = {
-  limit: number;
-  offset: number;
+export type ItemsResponse = {
+  page: number;
+  per_page: number;
   total: number;
-  items: User[];
+  items: Item[];
 };
 
-export type User = {
-  id: number;
-  name: string;
-  role: string;
-  ctime: number;
-};
-
-export type Product = {
-  id: number;
-  price: number;
-  sale: number;
-  img: string;
+export type Item = {
+  id:number;
+  abv?: number;
+  attenuation_level?: number;
   description: string;
+  food_pairing?: string;
+  image_url:string;
+  ingredients?:string;
+  name:string;
+  first_brewed?:string;
 };
 
-export type Notification = {
-  ctime: string;
-  event: string;
-};
-
-export type PagUsers = {
-  usersPerPage: number;
-  totalUsers: number;
-  paginate: number;
+export type PagItems = {
+  id:number;
+  abv?: number;
+  attenuation_level?: number;
+  description: string;
+  food_pairing?: string;
+  image_url:string;
+  ingredients?:string;
+  name:string;
+  first_brewed?:string;
 };
 
 export type CustomPaginationProps = {

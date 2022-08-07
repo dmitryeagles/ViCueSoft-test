@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route  } from 'react-router-dom'
-import { LoginPage } from './page/login-page';
 import { TopMenu } from './page/top-menu';
 
 function App() {
@@ -8,7 +7,6 @@ function App() {
     <BrowserRouter>
       <div>
         <Routes>
-          <Route element={<LoginPage/>} path="/login" />
           <Route element={<TopMenu/>} path="/" />
         </Routes>
       </div>

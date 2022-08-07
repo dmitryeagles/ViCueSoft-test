@@ -4,7 +4,3 @@ export interface ITabPanelProps {
   value: number;
 }
 
-export interface ISingInform {
-  login: string;
-  password: string;
-}
