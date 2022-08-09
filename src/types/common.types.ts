@@ -17,20 +17,10 @@ export type Item = {
   first_brewed?:string;
 };
 
-export type PagItems = {
-  id:number;
-  abv?: number;
-  attenuation_level?: number;
-  description: string;
-  food_pairing?: string;
-  image_url:string;
-  ingredients?:string;
-  name:string;
-  first_brewed?:string;
+export type BeerSearchQuery = {
+  page: number;
+  per_page: number;
+  name: string;
 };
 
-export type CustomPaginationProps = {
-  total: number;
-  perPage: number;
-  onPage: (page: number) => void;
-};
+

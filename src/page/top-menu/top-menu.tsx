@@ -43,8 +43,8 @@ export const TopMenu: React.FC = () => {
   };
 
   return (
-    <Box sx={{ marginLeft: "40px", marginRight: "40px" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+    <Box sx={{ marginLeft: "40px", marginRight: "40px"}}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider", width: "100%" }}>
         <Tabs
           value={value}
           onChange={handleChange}

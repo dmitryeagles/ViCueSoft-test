@@ -7,8 +7,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import IconButton from "@mui/material/IconButton";
 
 
 export type ItemRowProps = { item: Item };
@@ -17,22 +15,31 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item }) => {
   return (
     <Card
       sx={{
-        maxWidth: 220,
-        position: "relative",
-        margin: "10px",
+        width: "23%",
+        float: "left",
+        margin: " 0 1%",
+        marginTop: "25px"
       }}
     >
-      <div className="imgBox">
+      <Box sx={{
+        margin: "10px 20px",
+        borderBottom: 1,
+        borderColor: "divider",
+      }}>
         <CardMedia
-          className="itemImg"
+          sx={{
+            height: "300px",
+            width: "auto",
+            margin: "0 auto",
+            padding: "10px"
+          }}
           component="img"
-          height="80"
+          height="180"
           image={item.image_url}
           alt="Картинка пиваса"
         />
-      </div>
-
-      <CardContent>
+      </Box>
+      <CardContent sx={{ paddingBottom: "0" }}>
         <Box
           sx={{
             margin: "0 10px",
@@ -42,23 +49,48 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item }) => {
             variant="body2"
             color="text.secondary"
             fontSize="14px"
-            paddingTop="30px"
             fontWeight="bold"
+            minHeight="50px"
+          >
+            {item.name}
+          </Typography>
+        </Box>
+      </CardContent>
+      <CardContent sx={{ paddingBottom: "5px" }}>
+        <Box
+          sx={{
+            margin: "0 10px",
+          }}
+        >
+          <Typography
+            variant="body2"
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              WebkitLineClamp: 3,
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+
+            }}
+            color="text.secondary"
+            maxWidth="200px"
+            width="80%"
+            fontSize="14px"
+            fontWeight="100"
           >
             {item.description}
           </Typography>
         </Box>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ padding: "0 26px" }}>
         <Box
-          sx={{
-            marginLeft: "15px",
-          }}
         >
           <Button
             sx={{
               background: "white",
-              fontSize: "12px"
+              fontSize: "10px",
+              fontWeight: "100",
+              padding: '0'
             }}
           >
             Полное описание...
@@ -74,11 +106,11 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item }) => {
             width: "100%",
           }}
         >
-          <Button 
+          <Button
             sx={{
               width: "100%",
             }}
-            variant="contained" 
+            variant="contained"
             color="secondary"
           >
             В корзину

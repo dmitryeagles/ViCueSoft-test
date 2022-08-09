@@ -8,20 +8,39 @@ import {
   TableCell,
   Paper,
 } from "@mui/material";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { Item } from "../../types/common.types";
-import { fetchItemsOff } from "../../api/client.api";
+import { BeerSearchQuery, Item } from "../../types/common.types";
+import { fetchItems } from "../../api/client.api";
+import Button from "@mui/material/Button";
+import { Controller, useForm, SubmitHandler } from "react-hook-form";
+import TextField from "@mui/material/TextField";
 import { ItemRow } from "./item";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { useNavigate } from "react-router-dom";
 import "./items-page.css";
 
 
 export const ItemsPage: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [page, setPage] = React.useState<number>(1);
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  let navigate = useNavigate();
+  const {
+    handleSubmit,
+    control,
+  } = useForm<BeerSearchQuery>({ mode: "onChange" });
+  const onSubmit: SubmitHandler<BeerSearchQuery> = (data) => console.log(data);
+
+
   useEffect(() => {
     const fetchData = async () => {
-      setItems(await fetchItemsOff());
+      const resp = await fetchItems({ page: 1, per_page: 20, name: '' });
+      setItems(resp);
     };
     fetchData().catch((e) => console.error(e));
   }, []);
@@ -34,7 +53,7 @@ export const ItemsPage: React.FC = () => {
         marginRight: "10px",
         paddingLeft: "10px",
         paddingRight: "10px",
-        height: '68vh'
+        paddingBottom: "20px"
       }}
     >
       <Table>
@@ -42,7 +61,10 @@ export const ItemsPage: React.FC = () => {
           <TableHead>
             <TableRow>
               <TableCell
-                sx={{ flex: "1 1 100%", fontSize: "20px", padding: "20px" }}
+                sx={{
+                  fontSize: "20px",
+                  padding: "20px"
+                }}
                 align="center"
                 colSpan={9}
               >
@@ -50,26 +72,55 @@ export const ItemsPage: React.FC = () => {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            <TableCell sx={{p: '2px 4px', display: 'flex', alignItems: 'center', with: 600, justifyContent:'end'}}>
-              <InputBase
-              sx={{p: '2px 4px', display: 'flex', alignItems: 'center', with: 600}}
-              placeholder="Поискать пивас.."
-              inputProps={{ 'aria=lable': 'поискать пивас...'}}
-              />
-              <IconButton type="submit" sx={{ p:'10px' }} aria-label="search">
-                <SearchIcon/>
-              </IconButton>
+          <TableBody >
+            <TableCell sx={{
+              padding: '2px',
+              display: 'flex',
+              alignItems: 'center',
+              with: 600,
+              justifyContent: 'end',
+              marginBottom: '20px'
+            }}>
+              <form className="search-form__form" onSubmit={handleSubmit(onSubmit)}>
+                <Controller
+                  control={control}
+                  name="name"
+                  render={({ field }) => (
+                    <TextField
+                      label="поиск"
+                      type="name"
+                      margin="normal"
+                      className="login-form__input"
+                      onChange={(e) => field.onChange(e)}
+                      value={field.value}
+                    />
+                  )}
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disableElevation={true}
+                  sx={{ marginTop: 2, padding: "15px 0", marginLeft: "5px"}}
+                  onClick={() => navigate("/") }
+                >
+                  <SearchIcon />
+                </Button>
+              </form>
             </TableCell>
-            <div className="product-page__container">
+            <TableRow sx={{ display: "block", fontSize: "1rem" }}>
               {items.map((item) => (
-                <ItemRow item={item}/>
+                <ItemRow item={item} />
               ))}
-            </div>
+            </TableRow>
           </TableBody>
         </Table>
       </Table>
-      
+      <Stack 
+        spacing={2}
+        sx={{ marginTop: "20px" }}
+        >
+        <Pagination count={10} page={page} onChange={handleChange} variant="outlined" />
+      </Stack>
     </TableContainer>
   );
 };
