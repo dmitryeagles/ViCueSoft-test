@@ -12,38 +12,27 @@ import SearchIcon from "@mui/icons-material/Search";
 import { BeerSearchQuery, Item } from "../../types/common.types";
 import { fetchItems } from "../../api/client.api";
 import Button from "@mui/material/Button";
-import { Controller, useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { ItemRow } from "./item";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { useNavigate } from "react-router-dom";
 import "./items-page.css";
 
 
 export const ItemsPage: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
-  const [page, setPage] = React.useState<number>(1);
-
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-  };
-
-  let navigate = useNavigate();
-  const {
-    handleSubmit,
-    control,
-  } = useForm<BeerSearchQuery>({ mode: "onChange" });
-  const onSubmit: SubmitHandler<BeerSearchQuery> = (data) => console.log(data);
-
+  const [name, setName] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     const fetchData = async () => {
-      const resp = await fetchItems({ page: 1, per_page: 20, name: '' });
+      const resp = await fetchItems({ page, per_page: 25, name });
       setItems(resp);
     };
     fetchData().catch((e) => console.error(e));
-  }, []);
+  }, [page, name]);
+
 
   return (
     <TableContainer
@@ -81,45 +70,45 @@ export const ItemsPage: React.FC = () => {
               justifyContent: 'end',
               marginBottom: '20px'
             }}>
-              <form className="search-form__form" onSubmit={handleSubmit(onSubmit)}>
-                <Controller
-                  control={control}
-                  name="name"
-                  render={({ field }) => (
-                    <TextField
-                      label="поиск"
-                      type="name"
-                      margin="normal"
-                      className="login-form__input"
-                      onChange={(e) => field.onChange(e)}
-                      value={field.value}
-                    />
-                  )}
+              <form className="search-form__form" >
+                <TextField
+                  label="поиск"
+                  size="small"
+                  color="secondary"
+                  type="name"
+                  sx={{ width: "400px" }}
+                  margin="normal"
+                  onChange={(e) => {setName(e.target.value); setPage(1)}}
+                  value={name}
                 />
-                <Button
-                  type="submit"
+                {/* <Button
+                  type="button"
+                  color="secondary"
                   variant="contained"
-                  disableElevation={true}
-                  sx={{ marginTop: 2, padding: "15px 0", marginLeft: "5px"}}
-                  onClick={() => navigate("/") }
+                  sx={{ marginTop: 2, padding: "7px 0", marginLeft: "5px" }}
                 >
                   <SearchIcon />
-                </Button>
+                </Button> */}
               </form>
             </TableCell>
             <TableRow sx={{ display: "block", fontSize: "1rem" }}>
               {items.map((item) => (
-                <ItemRow item={item} />
+                <ItemRow key={item.id} item={item} />
               ))}
             </TableRow>
           </TableBody>
         </Table>
       </Table>
-      <Stack 
+      <Stack
         spacing={2}
         sx={{ marginTop: "20px" }}
-        >
-        <Pagination count={10} page={page} onChange={handleChange} variant="outlined" />
+      >
+        <Pagination
+          count={10}
+          page={page}
+          onChange={(_, num) => setPage(num)}
+          variant="outlined"
+        />
       </Stack>
     </TableContainer>
   );

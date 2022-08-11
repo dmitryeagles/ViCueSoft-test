@@ -12,7 +12,7 @@ export type Item = {
   description: string;
   food_pairing?: string;
   image_url:string;
-  ingredients?:string;
+  tagline?:string;
   name:string;
   first_brewed?:string;
 };

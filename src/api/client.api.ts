@@ -8,8 +8,7 @@ export async function fetchItems(query: BeerSearchQuery): Promise<Item[]> {
     beer_name: query.name ? query.name.replace(' ', '_') : undefined
   }
   const resp = await axios.get<Item[]>(
-    "https://api.punkapi.com/v2/beers",
-    { params: params }
+    "https://api.punkapi.com/v2/beers",{ params: params }
   );
   return resp.data
 }
