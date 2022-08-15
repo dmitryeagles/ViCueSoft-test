@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { debounce } from "lodash";
 import {
   TableContainer,
   Table,
@@ -8,11 +9,8 @@ import {
   TableCell,
   Paper,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 import { BeerSearchQuery, Item } from "../../types/common.types";
 import { fetchItems } from "../../api/client.api";
-import Button from "@mui/material/Button";
-import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { ItemRow } from "./item";
 import Pagination from '@mui/material/Pagination';
@@ -20,10 +18,12 @@ import Stack from '@mui/material/Stack';
 import "./items-page.css";
 
 
+
 export const ItemsPage: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [name, setName] = useState<string>("");
   const [page, setPage] = useState<number>(1);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +33,11 @@ export const ItemsPage: React.FC = () => {
     fetchData().catch((e) => console.error(e));
   }, [page, name]);
 
+  const UpdateOnChange = (e:any) => {
+    setName(e.target.value); 
+  };
+
+  const debouncedOnChange = debounce(UpdateOnChange, 300);
 
   return (
     <TableContainer
@@ -78,17 +83,9 @@ export const ItemsPage: React.FC = () => {
                   type="name"
                   sx={{ width: "400px" }}
                   margin="normal"
-                  onChange={(e) => {setName(e.target.value); setPage(1)}}
+                  onChange = {UpdateOnChange}
                   value={name}
                 />
-                {/* <Button
-                  type="button"
-                  color="secondary"
-                  variant="contained"
-                  sx={{ marginTop: 2, padding: "7px 0", marginLeft: "5px" }}
-                >
-                  <SearchIcon />
-                </Button> */}
               </form>
             </TableCell>
             <TableRow sx={{ display: "block", fontSize: "1rem" }}>
